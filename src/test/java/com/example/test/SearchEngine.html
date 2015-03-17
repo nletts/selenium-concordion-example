@@ -1,0 +1,24 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Search Engine Test!</h1>
+
+    <p>
+    	When the user performs a basic search
+    </p>
+
+    <div class="example">
+
+		<h3>Google</h3>
+		
+        <p>
+            When user searches for <b concordion:set="#word">Awesome</b>,
+            the first result will:
+            <b concordion:assertEquals="searchFor(#word)">Awesome | Define Awesome at Dictionary.com</b>
+        </p>
+        
+    </div>
+
+</body>
+</html>
