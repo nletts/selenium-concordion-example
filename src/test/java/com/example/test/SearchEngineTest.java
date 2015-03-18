@@ -1,13 +1,11 @@
 package com.example.test;
 
-import org.concordion.integration.junit4.ConcordionRunner;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-//@RunWith(ConcordionRunner.class)
+
 public class SearchEngineTest extends BaseTest {
 
     public String searchFor(String word) throws Exception {
