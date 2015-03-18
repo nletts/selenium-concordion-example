@@ -7,13 +7,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 
 @Configuration
 public class WebDriverConfig {
+    
+    @Bean
+    @Profile("default")
+    public WebDriver htmlUnitWebDriver() {
+        return new HtmlUnitDriver(BrowserVersion.CHROME);
+    }
     
     @Bean
     @Profile("chrome")

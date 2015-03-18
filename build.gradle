@@ -38,7 +38,8 @@ dependencies {
 }
 
 test {
-    systemProperties['concordion.output.dir'] = "${reporting.baseDir}"
+    systemProperty "concordion.output.dir", "${reporting.baseDir}"
+    systemProperty "spring.profiles.active", "chrome"
 }
 
 sourceSets {
