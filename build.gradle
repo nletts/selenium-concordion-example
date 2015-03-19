@@ -37,9 +37,12 @@ dependencies {
   //testCompile 'joda-time:joda-time:2.3'
 }
 
+
+
 test {
     systemProperty "concordion.output.dir", "${reporting.baseDir}"
-    systemProperty "spring.profiles.active", "chrome"
+    //Uncomment to use a specific browser
+    //systemProperty "spring.profiles.active", "firefox"
 }
 
 sourceSets {
@@ -49,5 +52,19 @@ sourceSets {
         }
     }
 }
+
+def webDrivers = [ "chrome", "firefox" ];
+
+webDrivers.each { def targetName -> 
+    task "driver-$targetName" (type: Test, dependsOn: 'clean') { 
+        doFirst {
+		    systemProperty "concordion.output.dir", "${reporting.baseDir}/$targetName"
+		    systemProperty "spring.profiles.active", "$targetName"
+		}
+    } 
+} 
+
+//Runs all defined browser web drivers
+task regression(dependsOn: tasks.matching { Task task -> task.name.startsWith("driver-")})
 
 

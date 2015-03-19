@@ -21,7 +21,7 @@ public class WebDriverConfig {
     @Bean
     @Profile("default")
     public WebDriver htmlUnitWebDriver() {
-        return new HtmlUnitDriver(BrowserVersion.CHROME);
+        return new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
     }
     
     @Bean
