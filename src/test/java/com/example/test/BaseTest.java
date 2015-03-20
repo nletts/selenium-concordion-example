@@ -3,6 +3,8 @@ package com.example.test;
 import java.io.IOException;
 
 import org.concordion.api.ResultSummary;
+import org.concordion.api.listener.ThrowableCaughtEvent;
+import org.concordion.api.listener.ThrowableCaughtListener;
 import org.concordion.internal.ConcordionBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +41,13 @@ public class BaseTest {
 
     @Test
     public void runConcordion() throws IOException {
-        ResultSummary resultSummary = new ConcordionBuilder().build().process(this);
+        //Allows seeing Concordion exceptions in jUnit test runner
+        ThrowableCaughtListener listener = new ThrowableCaughtListener() {
+            @Override
+            public void throwableCaught(ThrowableCaughtEvent event) {
+                System.out.println(event.getThrowable().getMessage());
+            }};
+        ResultSummary resultSummary = new ConcordionBuilder().withThrowableListener(listener).build().process(this);
         resultSummary.print(System.out, this);
         resultSummary.assertIsSatisfied(this);
     }
