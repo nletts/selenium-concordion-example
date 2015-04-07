@@ -15,3 +15,12 @@ For the web drivers you will need to download the related drivers/files:
 * [PhantomJS](http://phantomjs.org/download.html)
 * [Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 * [Firefox](https://getfirebug.com/downloads) - You'll need firebug
+
+The default run mode is _Headless_:
+```
+gradle
+```
+To run in _Regression_ mode:
+```
+gradle regression
+```
