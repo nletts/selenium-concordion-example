@@ -16,6 +16,8 @@ For the web drivers you will need to download the related drivers/files:
 * [Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 * [Firefox](https://getfirebug.com/downloads) - You'll need firebug
 
+Once the web drivers are downloaded and installed, you'll need to edit *src/test/java/test.properties* to set related paths
+
 The default run mode is _Headless_:
 ```
 gradle

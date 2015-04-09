@@ -5,17 +5,21 @@
     <h1>Search Engine Test!</h1>
 
     <p>
-    	When the user performs a basic search
+    	Tests basic search functionality
     </p>
 
     <div class="example">
 
-		<h3>thesaurus.com</h3>
+		<h3>wikipedia.com</h3>
 		
         <p>
-            When user searches for <b concordion:set="#word">awesome</b>,
-            the first Synonym result will:
-            <b concordion:assertEquals="searchFor(#word)">beautiful</b>
+            When user searches for <b concordion:set="#word">Test automation</b>,
+            the first paragraph will read:
+            <b concordion:assertEquals="searchFor(#word)">In software testing, test automation is the use of special 
+            software (separate from the software being tested) to control the execution of tests and the comparison of 
+            actual outcomes with predicted outcomes.[1] Test automation can automate some repetitive but necessary 
+            tasks in a formalized testing process already in place, or add additional testing that would be difficult 
+            to perform manually.</b>
         </p>
         
     </div>

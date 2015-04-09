@@ -2,22 +2,17 @@ package com.example.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class SearchEngineTest extends BaseTest {
 
     public String searchFor(String word) throws Exception {
-        getDriver().get("http://www.thesaurus.com/");
+        getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
         
-        WebElement searchBox = getDriver().findElement(By.id("q"));
+        WebElement searchBox = getDriver().findElement(By.id("searchInput"));
         searchBox.sendKeys(word);
         searchBox.submit();
-
-        WebElement firstResult = (new WebDriverWait(getDriver(), 10)).until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.relevancy-list ul > li > a > span.text")));
-
+        
+        WebElement firstResult = waitForElement(By.cssSelector("#mw-content-text > p"));
 
         return firstResult.getText();
     }
