@@ -1,0 +1,32 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Search</title>
+</head>
+<body>
+
+    <h1>Thesaurus Test!</h1>
+
+    <p>
+    	Tests basic thesaurus capability
+    </p>
+
+    <div class="example">
+
+        <h3>thesaurus.com</h3>
+        
+        <p>
+            When user searches for <b concordion:set="#noun">automation</b>,
+            the related synonyms will be:<br/>
+            
+            <table concordion:verifyRows="#synonyms : searchThesaurusFor(#noun)">
+		        <tr><th concordion:assertEquals="#synonyms">Synonyms</th></tr>
+		        <tr><td>computerization</td></tr>
+		        <tr><td>industrialization</td></tr>
+		        <tr><td>mechanization</td></tr>
+		    </table>
+        </p>
+        
+    </div>
+
+</body>
+</html>

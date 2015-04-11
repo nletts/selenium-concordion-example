@@ -7,8 +7,6 @@ import org.concordion.api.ResultSummary;
 import org.concordion.api.listener.ThrowableCaughtEvent;
 import org.concordion.api.listener.ThrowableCaughtListener;
 import org.concordion.internal.ConcordionBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,18 +25,9 @@ import com.example.test.config.WebDriverConfig;
 @ContextConfiguration(classes = {WebDriverConfig.class})
 @Ignore
 public class BaseTest {
-    
+
     @Autowired
     private WebDriver driver;
-
-    @Before
-    public void startUp() throws Exception {
-    }
-    
-    @After
-    public void shutDown() throws Exception {
-        driver.close();
-    }
 
     protected WebDriver getDriver() {
         return driver;

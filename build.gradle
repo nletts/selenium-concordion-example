@@ -54,3 +54,11 @@ webDrivers.each { def targetName ->
 task regression(dependsOn: tasks.matching { Task task -> task.name.startsWith("driver-")})
 
 
+tasks.withType(Test) {
+    include '**/Overview*'
+    testLogging {
+        events 'started', 'passed'
+    }
+}
+
+
