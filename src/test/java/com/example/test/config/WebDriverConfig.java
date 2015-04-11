@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,8 +16,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 @Configuration
 @PropertySource("test.properties")
@@ -35,8 +32,10 @@ public class WebDriverConfig {
     
     @Bean
     @Profile("default")
-    public WebDriver htmlUnitWebDriver() {
-        return new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+    public WebDriver phantomjsWebDriver() {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pantomjsWebDriverPath);
+        return new PhantomJSDriver(caps);
     }
     
     @Bean
@@ -55,14 +54,6 @@ public class WebDriverConfig {
         //Avoid startup screen
         firefoxProfile.setPreference("extensions.firebug.currentVersion", "2.0.8"); 
         return new FirefoxDriver(firefoxProfile);
-    }
-    
-    @Bean
-    @Profile("phantomjs")
-    public WebDriver phantomjsWebDriver() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, pantomjsWebDriverPath);
-        return new PhantomJSDriver(caps);
     }
 
     @Bean

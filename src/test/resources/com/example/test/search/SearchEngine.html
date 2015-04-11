@@ -1,0 +1,59 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Search Engine Test!</h1>
+
+    <p>
+    	Tests basic search functionality
+    </p>
+
+    <div class="example">
+
+		<h3>wikipedia.com</h3>
+		
+        <p>
+            When user searches for <b concordion:set="#word">Test automation</b>,
+            the first paragraph will read:<br/>
+            <b concordion:assertEquals="searchWikipediaFor(#word)">
+            In software testing, test automation is the use of special
+            software (separate from the software being tested) to control the execution of tests and the comparison of 
+            actual outcomes with predicted outcomes.[1] Test automation can automate some repetitive but necessary 
+            tasks in a formalized testing process already in place, or add additional testing that would be difficult 
+            to perform manually.</b>
+        </p>
+        
+    </div>
+    
+    <div class="example">
+
+        <h3>wordreference.com</h3>
+        
+        <p>
+            When user searches for <b concordion:set="#search">automation</b>,
+            the first paragraph will read:<br/>
+            <b concordion:assertEquals="searchWordReferenceFor(#search)">(process: mechanization)</b>
+        </p>
+        
+    </div>
+    
+    <div class="example">
+
+        <h3>thesaurus.com</h3>
+        
+        <p>
+            When user searches for <b concordion:set="#noun">automation</b>,
+            the related synonyms will be:<br/>
+            
+            <table concordion:verifyRows="#synonyms : searchThesaurusFor(#noun)">
+		        <tr><th concordion:assertEquals="#synonyms">Synonyms</th></tr>
+		        <tr><td>computerization</td></tr>
+		        <tr><td>industrialization</td></tr>
+		        <tr><td>mechanization</td></tr>
+		    </table>
+        </p>
+        
+    </div>
+
+</body>
+</html>

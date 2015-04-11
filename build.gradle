@@ -27,25 +27,15 @@ dependencies {
   testCompile 'log4j:log4j:1.2.17'
 }
 
-
-
 test {
     systemProperty "concordion.output.dir", "${reporting.baseDir}"
     //Uncomment to use a specific browser
-    //systemProperty "spring.profiles.active", "firefox"
-}
-
-sourceSets {
-    test {
-        resources {
-            srcDir 'src/test/java'
-        }
-    }
+    systemProperty "spring.profiles.active", "firefox"
 }
 
 task headless(type: Test, dependsOn: 'clean') {
     doFirst {
-        systemProperty "spring.profiles.active", "phantomjs"
+        systemProperty "concordion.output.dir", "${reporting.baseDir}"
     }
 }
 
