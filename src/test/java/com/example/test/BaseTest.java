@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.concordion.api.ResultSummary;
-import org.concordion.api.listener.ThrowableCaughtEvent;
-import org.concordion.api.listener.ThrowableCaughtListener;
-import org.concordion.internal.ConcordionBuilder;
+import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.extension.Extension;
+import org.concordion.internal.FixtureRunner;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +29,10 @@ public class BaseTest {
     @Autowired
     private WebDriver driver;
 
+    @Autowired
+    @Extension
+    public ConcordionExtension screenShotExtension;
+    
     protected WebDriver getDriver() {
         return driver;
     }
@@ -45,15 +49,8 @@ public class BaseTest {
 
     @Test
     public void runConcordion() throws IOException {
-        //Allows seeing Concordion exceptions in jUnit test runner
-        ThrowableCaughtListener listener = new ThrowableCaughtListener() {
-            @Override
-            public void throwableCaught(ThrowableCaughtEvent event) {
-                System.out.println(event.getThrowable().getMessage());
-            }};
-        ResultSummary resultSummary = new ConcordionBuilder().withThrowableListener(listener).build().process(this);
+        ResultSummary resultSummary = new FixtureRunner().run(this);
         resultSummary.print(System.out, this);
-        resultSummary.assertIsSatisfied(this);
     }
 
 }

@@ -3,6 +3,9 @@ package com.example.test.config;
 import java.io.File;
 import java.io.IOException;
 
+import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.ext.ScreenshotExtension;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,6 +20,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+import com.example.test.ext.SeleniumScreenshotTaker;
+
 @Configuration
 @PropertySource("test.properties")
 public class WebDriverConfig {
@@ -29,6 +34,9 @@ public class WebDriverConfig {
     
     @Value("${path.to.firebug.xpi}")
     private String firebugXpiPath;
+    
+    @Value("${max.screenshot.width}")
+    private int maxScreenshotWidth;
     
     @Bean
     @Profile("default")
@@ -54,6 +62,14 @@ public class WebDriverConfig {
         //Avoid startup screen
         firefoxProfile.setPreference("extensions.firebug.currentVersion", "2.0.8"); 
         return new FirefoxDriver(firefoxProfile);
+    }
+    
+    @Bean
+    public ConcordionExtension screenShotExtension(WebDriver driver) {
+        driver.manage().window().setSize(new Dimension(maxScreenshotWidth, 850));
+        return new ScreenshotExtension().setScreenshotTaker(new SeleniumScreenshotTaker(driver))
+                                         .setScreenshotOnAssertionSuccess(true)
+                                         .setMaxWidth(maxScreenshotWidth);
     }
 
     @Bean
